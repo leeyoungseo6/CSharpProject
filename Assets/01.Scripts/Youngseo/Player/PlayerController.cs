@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private float _speed;
 
+    [SerializeField]
+    private PlayerSO _playerSO;
     private Rigidbody2D _rigid;
 
     private void Awake()
@@ -18,14 +20,14 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
     }
 
-    private void LateUpdate()
-    {
-        _rigid.velocity = new Vector2(Mathf.Clamp(_rigid.velocity.x, -2f, 2f), _rigid.velocity.y);
-    }
-
     private void PlayerMove()
     {
         float x = Input.GetAxis("Horizontal");
-        _rigid.velocity = new Vector2(x, 0);
+        _rigid.velocity = new Vector2(x, 0) * _playerSO.speed;
+    }
+
+    private void LateUpdate()
+    {
+        _rigid.velocity = new Vector2(Mathf.Clamp(_rigid.velocity.x, -2f, 2f), _rigid.velocity.y);
     }
 }
