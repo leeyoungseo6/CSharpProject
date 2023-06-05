@@ -11,9 +11,13 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private LayerMask Star;
-    private Collider2D coll;
+    private Transform _starTrm;
 
     private int _orbitDir;
+
+    private bool _startOrbit = false;
+
+    private Vector3 _startVec;
 
     private void Awake()
     {
@@ -23,6 +27,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         OrbitStar();
+    }
+
+    private void LateUpdate()
+    {
         PlayerMove();
     }
 
@@ -35,15 +43,39 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            coll = Physics2D.OverlapCircle(transform.position, 6f, Star);
-            if (coll == null) return;
-            _orbitDir = coll.transform.position.x < 0 ? 180 : 0;
+            _starTrm = Physics2D.OverlapCircle(transform.position, 6f, Star)?.transform;
+            if (_starTrm == null) return;
+            _starTrm.position += new Vector3(0, 0, 0.1f);
+            _startVec = transform.position;
         }
-        if (Input.GetKey(KeyCode.Space) && coll != null)
+        if (Input.GetKey(KeyCode.Space) && _starTrm != null)
         {
-            float z = Mathf.Atan2(coll.transform.position.y - transform.position.y,
-                coll.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, z + _orbitDir);
+            IsRightTri();
+            if (_startOrbit)
+            {
+                float z = Mathf.Atan2(_starTrm.position.y - transform.position.y,
+                    _starTrm.position.x - transform.position.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, z + _orbitDir);
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            _startOrbit = false;
+            _starTrm = null;
+        }
+    }
+
+    private void IsRightTri()
+    {
+        float a = Vector3.Distance(_startVec, transform.position);
+        float b = Vector3.Distance(_starTrm.position, transform.position);
+        float c = Vector3.Distance(_starTrm.position, _startVec);
+        float p = Mathf.Pow(a, 2) + Mathf.Pow(b, 2) - Mathf.Pow(c, 2);
+        if (p > 0 && !_startOrbit)
+        {
+            _startOrbit = true;
+            int q = transform.up.normalized.y > 0 ? 1 : -1;
+            _orbitDir = _starTrm.position.x * q < transform.position.x * q ? 181 : -1;
         }
     }
 }
