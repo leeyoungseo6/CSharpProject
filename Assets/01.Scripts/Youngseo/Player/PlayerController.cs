@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _starTrm = Physics2D.OverlapCircle(transform.position, 6f, Star)?.transform;
+            _starTrm = Physics2D.OverlapCircle(transform.position, 6f, Star).transform;
             if (_starTrm == null) return;
             _starTrm.position += new Vector3(0, 0, 0.1f);
             _startVec = transform.position;
