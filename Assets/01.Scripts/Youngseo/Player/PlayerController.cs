@@ -26,12 +26,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        OrbitStar();
+        PlayerMove();
     }
 
     private void LateUpdate()
     {
-        PlayerMove();
+        OrbitStar();
     }
 
     private void PlayerMove()
