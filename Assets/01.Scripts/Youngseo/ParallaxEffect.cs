@@ -14,11 +14,6 @@ public class ParallaxEffect : MonoBehaviour
 
     private void Start()
     {
-        StartParrallax();
-    }
-
-    private void StartParrallax()
-    {
         _mainCamTrm = Camera.main.transform;
         _lastCamY = _mainCamTrm.position.y;
 
