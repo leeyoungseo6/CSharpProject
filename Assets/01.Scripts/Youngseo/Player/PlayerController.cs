@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour
         if (p > 0 && !_startOrbit)
         {
             _startOrbit = true;
-            int x = transform.up.normalized.x < 0 ? 1 : -1;
-            int y = _starTrm.position.y < transform.position.y ? 1 : -1;
+            int x = _starTrm.position.x < transform.position.x ? 1 : -1;
+            int y = transform.up.normalized.y > 0 ? 1 : -1;
             _orbitDir = x * y == 1 ? 181 : -1;
         }
     }
