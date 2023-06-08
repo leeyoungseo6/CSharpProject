@@ -12,16 +12,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask Star;
     private Transform _starTrm;
+    private Transform _lopeTrm;
+    private Vector3 _startVec;
 
     private int _orbitDir;
 
     private bool _startOrbit = false;
 
-    private Vector3 _startVec;
 
     private void Awake()
     {
         _speed = _playerSO.speed;
+        _lopeTrm = transform.Find("Lope");
     }
 
     private void Update()
@@ -53,13 +55,13 @@ public class PlayerController : MonoBehaviour
             IsRightTri();
             if (_startOrbit)
             {
-                float z = Mathf.Atan2(_starTrm.position.y - transform.position.y,
-                    _starTrm.position.x - transform.position.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, z + _orbitDir);
+                Vector2 toStar = (_starTrm.position - transform.position).normalized;
+                transform.right = toStar * _orbitDir;
             }
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            _lopeTrm.localScale = new Vector3(0, 0, 0);
             _startOrbit = false;
             _starTrm = null;
         }
@@ -71,12 +73,20 @@ public class PlayerController : MonoBehaviour
         float b = Vector3.Distance(_starTrm.position, transform.position);
         float c = Vector3.Distance(_starTrm.position, _startVec);
         float p = Mathf.Pow(a, 2) + Mathf.Pow(b, 2) - Mathf.Pow(c, 2);
+        SetLope(b);
         if (p > 0 && !_startOrbit)
         {
             _startOrbit = true;
             int x = _starTrm.position.x < transform.position.x ? 1 : -1;
             int y = transform.up.normalized.y > 0 ? 1 : -1;
-            _orbitDir = x * y == 1 ? 181 : -1;
+            _orbitDir = x * y == 1 ? -1 : 1;
         }
+    }
+
+    private void SetLope(float length)
+    {
+        float z = Mathf.Atan2(_starTrm.position.y - _lopeTrm.position.y, _starTrm.position.x - _lopeTrm.position.x) * Mathf.Rad2Deg;
+        _lopeTrm.rotation = Quaternion.Euler(0, 0, z + _orbitDir);
+        _lopeTrm.localScale = new Vector3(length, 1, 1);
     }
 }
