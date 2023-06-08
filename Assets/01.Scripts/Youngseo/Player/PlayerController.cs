@@ -107,10 +107,12 @@ public class PlayerController : MonoBehaviour
 
     private void ScoreText()
     {
-        _score = (int)(_playerTrm.position.y - transform.position.y / 2);
+        _score = (int)((_playerTrm.position.y - transform.position.y) / 2);
 
         if (_currentScore < _score)
-        _scoreText.text = _score.ToString();
-        _currentScore = _score;
+        {
+            _scoreText.text = _score.ToString();
+            _currentScore = _score;
+        }
     }
 }
