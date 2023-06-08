@@ -48,3 +48,6 @@ TagManager:
   - name: Star
     uniqueID: 562810695
     locked: 0
+  - name: Wall
+    uniqueID: 4073248711
+    locked: 0

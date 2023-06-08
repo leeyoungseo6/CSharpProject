@@ -11,13 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask Star;
     private Transform _starTrm;
-    private Transform _lopeTrm;
+    [SerializeField]
+    private Transform _ropeTrm;
     private Vector3 _startVec;
-    private Transform _playerTrm;
 
     private float _orbitDir;
 
     private bool _startOrbit = false;
+
+    [SerializeField]
+    SpriteRenderer[] _walls;
 
     #region Å×½ºÆ® UI
     [SerializeField]
@@ -25,13 +28,13 @@ public class PlayerController : MonoBehaviour
 
     private int _score = 0;
     private int _currentScore = 0;
+    Vector3 _gameStartPos;
     #endregion
 
     private void Awake()
     {
         _speed = _playerSO.speed;
-        _playerTrm = transform.Find("PlayerVisual");
-        _lopeTrm = transform.Find("Lope");
+        _gameStartPos = transform.position;
     }
 
     private void Update()
@@ -43,30 +46,34 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        _playerTrm.position += _playerTrm.up * _speed * Time.deltaTime;
+        transform.position += transform.up * _speed * Time.deltaTime;
     }
 
     private void OrbitStar()
     {
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _starTrm = Physics2D.OverlapCircle(_playerTrm.position, 6f, Star).transform;
+            _starTrm = Physics2D.OverlapCircle(transform.position, 6f, Star).transform;
             if (_starTrm == null) return;
             _starTrm.position += new Vector3(0, 0, 0.1f);
-            _startVec = _playerTrm.position;
+            _startVec = transform.position;
         }
         if (Input.GetKey(KeyCode.Space) && _starTrm != null)
         {
             IsRightTri();
             if (_startOrbit)
             {
-                float z = Mathf.Atan2(_starTrm.position.y - _playerTrm.position.y, _starTrm.position.x - _playerTrm.position.x) * Mathf.Rad2Deg;
-                _playerTrm.rotation = Quaternion.Euler(0, 0, z + _orbitDir);
+                float z = Mathf.Atan2(_starTrm.position.y - transform.position.y, _starTrm.position.x - transform.position.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, z + _orbitDir);
             }
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            _lopeTrm.localScale = new Vector3(0, 0, 0);
+            _walls[0].color = new Color(0.8f, 0.4f, 0.4f);
+            _walls[1].color = new Color(0.8f, 0.4f, 0.4f);
+            
+            _ropeTrm.localScale = new Vector3(0, 0, 0);
             _startOrbit = false;
             _starTrm = null;
         }
@@ -74,16 +81,19 @@ public class PlayerController : MonoBehaviour
 
     private void IsRightTri()
     {
-        float a = Vector3.Distance(_startVec, _playerTrm.position);
-        float b = Vector3.Distance(_starTrm.position, _playerTrm.position);
+        float a = Vector3.Distance(_startVec, transform.position);
+        float b = Vector3.Distance(_starTrm.position, transform.position);
         float c = Vector3.Distance(_starTrm.position, _startVec);
         float p = Mathf.Pow(a, 2) + Mathf.Pow(b, 2) - Mathf.Pow(c, 2);
         SetLope(b);
         if (p > 0 && !_startOrbit)
         {
+            _walls[0].color = new Color(0.6f, 0.8f, 0.8f);
+            _walls[1].color = new Color(0.6f, 0.8f, 0.8f);
+
             _startOrbit = true;
-            int x = _starTrm.position.x < _playerTrm.position.x ? 1 : -1;
-            int y = _playerTrm.up.normalized.y > 0 ? 1 : -1;
+            int x = _starTrm.position.x < transform.position.x ? 1 : -1;
+            int y = transform.up.normalized.y > 0 ? 1 : -1;
             _orbitDir = x * y == 1 ? 181: -1;
             _orbitDir += Time.deltaTime * _speed * x * y;
         }
@@ -91,15 +101,15 @@ public class PlayerController : MonoBehaviour
 
     private void SetLope(float length)
     {
-        float z = Mathf.Atan2(_starTrm.position.y - _lopeTrm.position.y, _starTrm.position.x - _lopeTrm.position.x) * Mathf.Rad2Deg;
-        _lopeTrm.rotation = Quaternion.Euler(0, 0, z);
-        _lopeTrm.localScale = new Vector3(length, 1);
-        _lopeTrm.position = _playerTrm.position;
+        float z = Mathf.Atan2(_starTrm.position.y - _ropeTrm.position.y, _starTrm.position.x - _ropeTrm.position.x) * Mathf.Rad2Deg;
+        _ropeTrm.rotation = Quaternion.Euler(0, 0, z);
+        _ropeTrm.localScale = new Vector3(length, 1);
+        _ropeTrm.position = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall"))
+        if (collision.CompareTag("Wall") && !_startOrbit)
         {
             Destroy(gameObject);
         }
@@ -107,11 +117,11 @@ public class PlayerController : MonoBehaviour
 
     private void ScoreText()
     {
-        _score = (int)((_playerTrm.position.y - transform.position.y) / 2);
+        _score = (int)((transform.position.y - _gameStartPos.y) / 2);
 
         if (_currentScore < _score)
         {
-            _scoreText.text = _score.ToString();
+            _scoreText.text = $"{_currentScore:D2}";
             _currentScore = _score;
         }
     }
