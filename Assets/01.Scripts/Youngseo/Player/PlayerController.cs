@@ -120,9 +120,9 @@ public class PlayerController : MonoBehaviour
     {
         int y = transform.up.y > 0 ? 1 : -1;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x + transform.right.x * -4 * y, transform.position.y), new Vector2(8f, 18f));
+        Gizmos.DrawWireCube(transform.position + transform.right * -4 * y, new Vector2(8f, 18f));
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x + transform.right.x *  4 * y, transform.position.y), new Vector2(8f, 18f));
+        Gizmos.DrawWireCube(transform.position + transform.right *  4 * y, new Vector2(8f, 18f));
     }
 
     private bool IsRightTri()
