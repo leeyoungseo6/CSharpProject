@@ -88,9 +88,8 @@ public class PlayerController : MonoBehaviour
     private void Targeting()
     {
         _toStarDis = 100;
-        int y = transform.up.y > 0 ? 1 : -1;
-        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4 * y, new Vector2(8f, 18f), transform.rotation.z, Star);
-        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4 * y, new Vector2(8f, 18f), transform.rotation.z, Star);
+        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4, new Vector2(8f, 18f), transform.rotation.z, Star);
+        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4, new Vector2(8f, 18f), transform.rotation.z, Star);
 
         foreach (Collider2D target in _starCollsL)
         {
@@ -118,11 +117,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        int y = transform.up.y > 0 ? 1 : -1;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + transform.right * -4 * y, new Vector2(8f, 18f));
+        Gizmos.DrawWireCube(transform.position + transform.right * -4, new Vector2(8f, 18f));
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position + transform.right *  4 * y, new Vector2(8f, 18f));
+        Gizmos.DrawWireCube(transform.position + transform.right *  4, new Vector2(8f, 18f));
     }
 
     private bool IsRightTri()
@@ -138,8 +136,8 @@ public class PlayerController : MonoBehaviour
             _walls[1].color = new Color(0.6f, 0.8f, 0.8f);
 
             _startOrbit = true;
-            if (_left) _orbitDir = 180 + 2.2f / b;
-            else _orbitDir = -2.2f / b;
+            if (_left) _orbitDir = 180 + 2.8f / b;
+            else _orbitDir = -2.8f / b;
         }
         return _startOrbit;
     }
