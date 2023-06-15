@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private LayerMask Star;
-    private Collider2D[] _starCollsA;
-    private Collider2D[] _starCollsB;
+    private Collider2D[] _starCollsL;
+    private Collider2D[] _starCollsR;
     private Vector3 _targetStar;
     [SerializeField]
     private Transform _ropeTrm;
@@ -67,9 +67,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            _walls[0].color = new Color(0.6f, 0.8f, 0.8f);
-            _walls[1].color = new Color(0.6f, 0.8f, 0.8f);
-
             if (IsRightTri())
             {
                 float angle = Mathf.Atan2(_targetStar.y - transform.position.y, _targetStar.x - transform.position.x) * Mathf.Rad2Deg;
@@ -91,10 +88,11 @@ public class PlayerController : MonoBehaviour
     private void Targeting()
     {
         _toStarDis = 100;
-        _starCollsA = Physics2D.OverlapBoxAll(new Vector2(-2f, transform.position.y), new Vector2(2f, 18f), transform.rotation.z, Star);
-        _starCollsB = Physics2D.OverlapBoxAll(new Vector2(2f, transform.position.y), new Vector2(2f, 18f), transform.rotation.z, Star);
+        int y = transform.up.y > 0 ? 1 : -1;
+        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4 * y, new Vector2(8f, 18f), transform.rotation.z, Star);
+        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4 * y, new Vector2(8f, 18f), transform.rotation.z, Star);
 
-        foreach (Collider2D target in _starCollsA)
+        foreach (Collider2D target in _starCollsL)
         {
             float distance = Vector3.Distance(target.transform.position, transform.position);
             if (distance < _toStarDis)
@@ -105,7 +103,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        foreach (Collider2D target in _starCollsB)
+        foreach (Collider2D target in _starCollsR)
         {
             float distance = Vector3.Distance(target.transform.position, transform.position);
             if (distance < _toStarDis)
@@ -118,6 +116,15 @@ public class PlayerController : MonoBehaviour
         _ropeTrm.position = transform.position;
     }
 
+    private void OnDrawGizmos()
+    {
+        int y = transform.up.y > 0 ? 1 : -1;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x + transform.right.x * -4 * y, transform.position.y), new Vector2(8f, 18f));
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x + transform.right.x *  4 * y, transform.position.y), new Vector2(8f, 18f));
+    }
+
     private bool IsRightTri()
     {
         float a = Vector3.Distance(_startVec, transform.position);
@@ -127,6 +134,9 @@ public class PlayerController : MonoBehaviour
         SetRope(b);
         if (p > 0 && !_startOrbit)
         {
+            _walls[0].color = new Color(0.6f, 0.8f, 0.8f);
+            _walls[1].color = new Color(0.6f, 0.8f, 0.8f);
+
             _startOrbit = true;
             if (_left) _orbitDir = 180 + 2.2f / b;
             else _orbitDir = -2.2f / b;
