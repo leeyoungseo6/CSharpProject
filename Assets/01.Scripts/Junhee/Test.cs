@@ -7,10 +7,10 @@ public class Test : MonoBehaviour
     public float speed = 10f;
     void Start()
     {
-        
+
     }
 
-    
+
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -23,6 +23,10 @@ public class Test : MonoBehaviour
         {
             GameManager.instance.AddScore();
 
+        }
+        if (collision.CompareTag("Box"))
+        {
+            GameManager.instance.Die();
         }
 
     }
