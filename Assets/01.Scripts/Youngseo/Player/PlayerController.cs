@@ -115,14 +115,6 @@ public class PlayerController : MonoBehaviour
         _ropeTrm.position = transform.position;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + transform.right * -4, new Vector2(8f, 18f));
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position + transform.right *  4, new Vector2(8f, 18f));
-    }
-
     private bool IsRightTri()
     {
         float a = Vector3.Distance(_startVec, transform.position);
