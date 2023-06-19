@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -40,4 +41,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2082936545
+    locked: 0
+  - name: Star
+    uniqueID: 4266359321
+    locked: 0
+  - name: Wall
+    uniqueID: 2207728253
     locked: 0
