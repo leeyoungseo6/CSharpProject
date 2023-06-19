@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
     public void TtileButton()
     {
-        Debug.Log("titleScene");
+        SceneManager.LoadScene("Start");
     }
 
     public int Score
@@ -85,6 +85,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Junhee");
         Time.timeScale = 1;
 
+    }
+    public void StartButton()
+    {
+        SceneManager.LoadScene("Junhee");
+        Debug.Log("start");
+    }
+    public void ExitButton()
+    {
+        Application.Quit();
+        Debug.Log("exit");
     }
  
 
