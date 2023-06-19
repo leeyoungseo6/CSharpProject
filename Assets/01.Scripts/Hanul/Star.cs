@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Star : MonoBehaviour
 {
-    [SerializeField] Sprite[] _sprite;
     SpriteRenderer _speiteRenderer;
+    [SerializeField] Sprite[] _sprite;
     void Start()
     {
-        _speiteRenderer = GetComponent<SpriteRenderer>();
         int x = Random.Range(0, 3);
         _speiteRenderer.sprite = _sprite[x];
+        _speiteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
