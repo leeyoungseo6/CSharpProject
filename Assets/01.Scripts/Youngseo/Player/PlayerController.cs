@@ -88,8 +88,8 @@ public class PlayerController : MonoBehaviour
     private void Targeting()
     {
         _toStarDis = 100;
-        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4, new Vector2(8f, 18f), transform.rotation.z, Star);
-        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4, new Vector2(8f, 18f), transform.rotation.z, Star);
+        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4, new Vector2(8f, 20f), transform.rotation.z, Star);
+        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4, new Vector2(8f, 20f), transform.rotation.z, Star);
 
         foreach (Collider2D target in _starCollsL)
         {
