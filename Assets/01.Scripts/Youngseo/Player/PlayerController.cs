@@ -27,9 +27,6 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer[] _walls;
 
     #region Å×½ºÆ® UI
-    [SerializeField]
-    private TextMeshProUGUI _scoreText;
-
     private int _score = 0;
     private int _currentScore = 0;
     Vector3 _gameStartPos;
@@ -162,7 +159,6 @@ public class PlayerController : MonoBehaviour
 
         if (_currentScore < _score)
         {
-            _scoreText.text = $"{_currentScore:D2}";
             _currentScore = _score;
         }
     }
