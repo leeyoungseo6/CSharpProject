@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PlayerMove();
-        SetScoreText();
+        SetScore();
     }
 
     private void LateUpdate()
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour
         OrbitStar();
     }
 
-    private void PlayerMove()
+    private void PlayerMove() //tranform.up 방향으로 이동
     {
         transform.position += transform.up * _speed * Time.deltaTime;
     }
@@ -62,7 +61,7 @@ public class PlayerController : MonoBehaviour
             _startVec = transform.position;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)) //스페이스바 누를 시 별과 90도 유지
         {
             if (IsRightTri())
             {
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Targeting()
+    private void Targeting() //가장 가까운 별 타겟팅
     {
         _toStarDis = 100;
         _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4, new Vector2(8f, 20f), transform.rotation.z, Star);
@@ -112,7 +111,7 @@ public class PlayerController : MonoBehaviour
         _ropeTrm.position = transform.position;
     }
 
-    private bool IsRightTri()
+    private bool IsRightTri() //별과 플레이어가 만드는 삼각형이 직각삼각형일 때 true
     {
         float a = Vector3.Distance(_startVec, transform.position);
         float b = Vector3.Distance(_targetStar, transform.position);
@@ -131,16 +130,16 @@ public class PlayerController : MonoBehaviour
         return _startOrbit;
     }
 
-    private void SetRope(float length)
+    private void SetRope(float length) //rope 길이 설정
     {
         _ropeTrm.right = (_targetStar - transform.position).normalized;
         _ropeTrm.localScale = new Vector3(length, 1);
         _ropeTrm.position = transform.position;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //벽이나 별에 닿으면 사망
     {
-        if (collision.CompareTag("Wall") && !_startOrbit)
+        if (collision.CompareTag("Wall") && !_startOrbit) //회전 중엔 벽에 닿아도 안 죽음
         {
             Destroy(_ropeTrm.gameObject);
             Destroy(gameObject);
@@ -153,7 +152,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetScoreText()
+    private void SetScore() //스코어 설정
     {
         _score = (int)((transform.position.y - _gameStartPos.y) / 2);
 
