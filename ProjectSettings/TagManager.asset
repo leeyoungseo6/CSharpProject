@@ -45,15 +45,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Wall
+    uniqueID: 2207728253
+    locked: 0
+  - name: Star
+    uniqueID: 4266359321
+    locked: 0
   - name: Rope
     uniqueID: 346798957
     locked: 0
   - name: Player
     uniqueID: 2082936545
     locked: 0
-  - name: Star
-    uniqueID: 4266359321
-    locked: 0
-  - name: Wall
-    uniqueID: 2207728253
+  - name: Player1
+    uniqueID: 213540851
     locked: 0

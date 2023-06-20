@@ -41,6 +41,12 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         SetScore();
+
+        if (!_startOrbit && Mathf.Abs(transform.position.x) > 3.6f) //회전 중엔 벽 나가도 안 죽음
+        {
+            Destroy(_ropeTrm.gameObject);
+            Destroy(gameObject);
+        }
     }
 
     private void LateUpdate()
@@ -139,12 +145,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //벽이나 별에 닿으면 사망
     {
-        if (collision.CompareTag("Wall") && !_startOrbit) //회전 중엔 벽에 닿아도 안 죽음
-        {
-            Destroy(_ropeTrm.gameObject);
-            Destroy(gameObject);
-        }
-
         if (collision.CompareTag("Star"))
         {
             Destroy(_ropeTrm.gameObject);
