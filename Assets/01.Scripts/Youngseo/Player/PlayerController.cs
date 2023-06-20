@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     private void SetRope(float length) //rope 길이 설정
     {
         _ropeTrm.right = (_targetStar - transform.position).normalized;
-        _ropeTrm.localScale = new Vector3(length, 1);
+        _ropeTrm.localScale = new Vector3(length, 3);
         _ropeTrm.position = transform.position;
     }
 
