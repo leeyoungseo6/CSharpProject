@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         SetScore();
 
-        if (!_startOrbit && Mathf.Abs(transform.position.x) > 3.6f) //회전 중엔 벽 나가도 안 죽음
+        if (!_startOrbit && Mathf.Abs(transform.position.x) > 3.4f) //회전 중엔 벽 나가도 안 죽음
         {
             Destroy(_ropeTrm.gameObject);
             Destroy(gameObject);
