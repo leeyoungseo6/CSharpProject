@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7795666369904035572}
   - component: {fileID: 7795666369904035573}
   - component: {fileID: -8114450865861502942}
-  - component: {fileID: 2774872592236397382}
+  - component: {fileID: 6401619756485393076}
   m_Layer: 7
   m_Name: Star
-  m_TagString: Wall
+  m_TagString: Star
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ CircleCollider2D:
   m_Offset: {x: -0.031897724, y: 0.0031897724}
   serializedVersion: 2
   m_Radius: 0.43301484
---- !u!114 &2774872592236397382
+--- !u!114 &6401619756485393076
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,13 +112,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7795666369904035578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c49b678fe84af4096cec9c70592656, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff27c3c83831f147be584398c7e8037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite:
+  - {fileID: 398029120, guid: 26c76c3b1f8f04348940f23b53ccfed2, type: 3}
   - {fileID: -851843461, guid: 26c76c3b1f8f04348940f23b53ccfed2, type: 3}
   - {fileID: 1584287024, guid: 26c76c3b1f8f04348940f23b53ccfed2, type: 3}
-  - {fileID: 398029120, guid: 26c76c3b1f8f04348940f23b53ccfed2, type: 3}
   - {fileID: -663492276, guid: 26c76c3b1f8f04348940f23b53ccfed2, type: 3}
 --- !u!1001 &3821078640537554535
 PrefabInstance:
