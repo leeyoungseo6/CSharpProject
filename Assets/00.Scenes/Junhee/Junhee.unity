@@ -1053,6 +1053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 780368824}
   - component: {fileID: 780368825}
+  - component: {fileID: 780368826}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1090,6 +1091,18 @@ MonoBehaviour:
   stoppanel: {fileID: 1048240942}
   scoreText: {fileID: 1474022853}
   Retrypanel: {fileID: 453633806}
+--- !u!114 &780368826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780368823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52cff121ff537a94ab55463115f60a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1034035209
 GameObject:
   m_ObjectHideFlags: 0
