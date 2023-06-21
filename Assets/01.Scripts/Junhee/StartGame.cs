@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneStart : MonoBehaviour
+public class StartGame : MonoBehaviour
 {
     
+
 }

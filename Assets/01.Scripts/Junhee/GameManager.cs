@@ -7,30 +7,60 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    
+    public static GameManager instance = null;
+
     bool pause;
     public GameObject stoppanel;
-    public static GameManager instance = null;
-    [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] GameObject Retrypanel;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI highScoreText;
+    [SerializeField] GameObject _startButton;
+    [SerializeField] GameObject _exitButton;
+    int highscore = 0;
     int score = 0;
 
+    public int Score
+    {
+        get { return score; }
+        set
+        {
+            if (value > 0) score = value;
+        }
 
+    }
     private void Awake()
     {
         instance = this;
     }
 
-    void Start()
+    private void Start()
     {
-        pause = false;
+        SceneManager.LoadScene("Youngseo", LoadSceneMode.Additive);
     }
 
-    
+    public void AddScore(int point)
+    {
+        Score = point;
+        if (highscore < score)
+        {
+            highscore = score;
+            PlayerPrefs.SetInt("High Score", highscore);
+        }
+
+        UpdateScoreText();
+    }
+    private void UpdateScoreText()
+    {
+        scoreText.text = $"{Score:2D}";
+        //highScore.text = highScore.ToString();
+    }
+
     void Update()
     {
-        if(Input.GetKeyDown (KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(pause ==false)
+            if (pause == false)
             {
                 Time.timeScale = 0;
                 pause = true;
@@ -38,7 +68,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
 
-            if(pause ==true)
+            if (pause == true)
             {
                 Time.timeScale = 1;
                 pause = false;
@@ -52,53 +82,31 @@ public class GameManager : MonoBehaviour
         stoppanel.SetActive(false);
         Time.timeScale = 1;
     }
-    public void TtileButton()
-    {
-        SceneManager.LoadScene("Start");
-    }
-
-    public int Score
-    {
-        get { return score; }
-        set
-        {
-            if (value > 0) score = value;
-        }
-    }
-    public void AddScore(int point)
-    {
-        Score = point;
-        UpdateScoreText();
-    }
-    private void UpdateScoreText()
-    {
-        scoreText.text = "Score :  " + Score;
-    }
     public void Die()
     {
         Retrypanel.SetActive(true);
         Time.timeScale = 0;
-       
+
     }
     public void Retry()
     {
-        SceneManager.LoadScene("Junhee");
+        SceneManager.LoadScene("Youngseo");
         Time.timeScale = 1;
 
     }
+    public void TtileButton()
+    {
+        SceneManager.LoadScene("Youngseo");
+    }
     public void StartButton()
     {
-        SceneManager.LoadScene("Junhee" );
-        
-
-        Debug.Log("start");
+        SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
+        _startButton.SetActive(false);
+        _exitButton.SetActive(false);
     }
     public void ExitButton()
     {
         Application.Quit();
         Debug.Log("exit");
     }
- 
-
-
 }
