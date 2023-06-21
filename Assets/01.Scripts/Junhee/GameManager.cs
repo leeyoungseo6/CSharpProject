@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _exitButton;
     int highscore = 0;
     int score = 0;
+    public bool _gameOver = false;
 
     public int Score
     {
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
     }
     public void Die()
     {
+        _gameOver = true;
         Retrypanel.SetActive(true);
         Time.timeScale = 0;
     }
