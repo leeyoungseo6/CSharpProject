@@ -21,7 +21,7 @@ public class CreatStar : MonoBehaviour
     {
         while (true)
         {
-            if(GameManager.instance.Score > _prevscore + 3f)
+            if(GameManager.instance.Score > _prevscore + 2.5f)
             {
                 _prevscore = GameManager.instance.Score;
                 yield return new WaitForSeconds(0.3f);

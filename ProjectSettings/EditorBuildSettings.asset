@@ -6,15 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00.Scenes/Junhee/Start.unity
-    guid: 728e204edc967164789ccd76c74a883a
+    path: Assets/00.Scenes/Youngseo/Youngseo.unity
+    guid: d71a364fbe2780744be059229fcdeae9
   - enabled: 1
     path: Assets/00.Scenes/Junhee/Junhee.unity
     guid: 94fbb150df5e87b489c820268803aa92
   - enabled: 1
     path: Assets/00.Scenes/Hanul/Hanul.unity
     guid: 4b1fa0ddb7cb1fc4fa4a061a4023381d
-  - enabled: 1
-    path: Assets/00.Scenes/Youngseo/Youngseo.unity
-    guid: d71a364fbe2780744be059229fcdeae9
   m_configObjects: {}
