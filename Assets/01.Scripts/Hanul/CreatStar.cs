@@ -22,11 +22,11 @@ public class CreatStar : MonoBehaviour
     {
         while (true)
         {
-            if(GameManager.instance.Score > _prevscore + Random.Range(1, 2f))
+            if(GameManager.instance.Score > _prevscore + 0.1f)
             {
                 _prevscore = GameManager.instance.Score;
-                float x = Random.Range(0.7f, 1.4f);
-                yield return new WaitForSeconds(x);
+                //float x = Random.Range(1f, 1.9f);
+                yield return new WaitForSeconds(2);
                 GameObject enemy = Instantiate(_enemyPrefab);
                 int rdIndex = Random.Range(0, transform.childCount);
                 enemy.transform.position = transform.GetChild(rdIndex).position;
