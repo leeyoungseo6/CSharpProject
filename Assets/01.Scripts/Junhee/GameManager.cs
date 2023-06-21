@@ -35,11 +35,6 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        //SceneManager.LoadScene("Youngseo", LoadSceneMode.Additive);
-    }
-
     public void AddScore(int point)
     {
         Score = point;
@@ -54,7 +49,6 @@ public class GameManager : MonoBehaviour
     private void UpdateScoreText()
     {
         scoreText.text = $"{Score:2D}";
-        //highScore.text = highScore.ToString();
     }
 
     void Update()
