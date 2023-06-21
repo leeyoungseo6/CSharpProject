@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.LoadScene("Youngseo", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("Youngseo", LoadSceneMode.Additive);
     }
 
     public void AddScore(int point)
@@ -86,7 +86,6 @@ public class GameManager : MonoBehaviour
     {
         Retrypanel.SetActive(true);
         Time.timeScale = 0;
-
     }
     public void Retry()
     {
