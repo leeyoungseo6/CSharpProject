@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] GameObject _startButton;
     [SerializeField] GameObject _exitButton;
+    [SerializeField] TextMeshProUGUI _titleText;
     int score = 0;
     int startScore = 0;
     public bool _gameOver = true;
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         Score = 0;
         Time.timeScale = 1;
+        _titleText.gameObject.SetActive(true);
         SceneManager.LoadScene("Youngseo");
     }
     public void StartButton()
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         startScore = Score;
         SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
         scoreText.gameObject.SetActive(true);
+        _titleText.gameObject.SetActive(false);
         _startButton.SetActive(false);
         _exitButton.SetActive(false);
         _gameOver = false;
