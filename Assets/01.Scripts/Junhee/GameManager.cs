@@ -65,14 +65,14 @@ public class GameManager : MonoBehaviour
             if (value > 0) score = value;
         }
     }
-    public void AddScore(int point=100)
+    public void AddScore(int point)
     {
-        score += point;
+        Score += point;
         UpdateScoreText();
     }
     private void UpdateScoreText()
     {
-        scoreText.text = "Score :  " + score;
+        scoreText.text = "Score :  " + Score;
     }
     public void Die()
     {
