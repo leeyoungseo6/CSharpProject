@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         _speed = _playerSO.speed;
         _gameStartPos = transform.position;
+        SceneManager.LoadScene("Junhee", LoadSceneMode.Additive);
     }
 
     private void Update()

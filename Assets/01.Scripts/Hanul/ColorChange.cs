@@ -7,6 +7,11 @@ public class ColorChange : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     [SerializeField] Sprite[] _sprite;
 
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
         int x = Random.Range(0, 4);
