@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddScore(int point)
     {
-        Score += point;
+        Score = point;
         UpdateScoreText();
     }
     private void UpdateScoreText()
