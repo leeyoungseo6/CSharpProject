@@ -14,6 +14,7 @@ public class CreatStar : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.instance._gameOver) return;
         transform.position = new Vector2(0, _player.position.y);
     }
     IEnumerator SpawnEnemy()
