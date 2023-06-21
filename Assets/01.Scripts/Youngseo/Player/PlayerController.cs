@@ -147,6 +147,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Star"))
         {
+            GameManager.instance.Die();
             Destroy(_ropeTrm.gameObject);
             Destroy(gameObject);
         }
@@ -159,6 +160,7 @@ public class PlayerController : MonoBehaviour
         if (_currentScore < _score)
         {
             _currentScore = _score;
+            GameManager.instance.AddScore(_score);
         }
     }
 }
