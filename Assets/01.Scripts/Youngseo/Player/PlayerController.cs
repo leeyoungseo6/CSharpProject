@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
             _startVec = transform.position;
         }
 
-        if (Input.GetKey(KeyCode.Space)) //스페이스바 누를 시 별과 90도 유지
+        if (Input.GetKey(KeyCode.Space) && _targetStar != Vector3.one) //스페이스바 누를 시 별과 90도 유지
         {
             if (IsRightTri())
             {
@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
             _walls[0].color = new Color(0.8f, 0.4f, 0.4f);
             _walls[1].color = new Color(0.8f, 0.4f, 0.4f);
 
+            _targetStar = Vector3.one;
             _ropeTrm.localScale = Vector3.zero;
             _startOrbit = false;
             _left = false;
