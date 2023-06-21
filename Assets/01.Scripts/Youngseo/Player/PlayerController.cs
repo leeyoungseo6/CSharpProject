@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Star"))
         {
             GameManager.instance.Die();
+            Destroy(GetComponent<CreatStar>().gameObject);
             Destroy(_ropeTrm.gameObject);
             Destroy(gameObject);
         }
