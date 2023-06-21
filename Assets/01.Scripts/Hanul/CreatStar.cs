@@ -21,7 +21,7 @@ public class CreatStar : MonoBehaviour
     {
         while (true)
         {
-            if(GameManager.instance.Score > _prevscore + 0.1f)
+            if(GameManager.instance.Score > _prevscore + 0.5f)
             {
                 _prevscore = GameManager.instance.Score;
                 //float x = Random.Range(1f, 1.9f);
