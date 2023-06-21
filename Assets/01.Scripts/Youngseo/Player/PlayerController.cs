@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
         if (!_startOrbit && Mathf.Abs(transform.position.x) > 3.4f) //회전 중엔 벽 나가도 안 죽음
         {
+            GameManager.instance.Die();
             Destroy(_ropeTrm.gameObject);
             Destroy(gameObject);
         }
@@ -150,7 +151,6 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Star"))
         {
             GameManager.instance.Die();
-            Destroy(GetComponent<CreatStar>().gameObject);
             Destroy(_ropeTrm.gameObject);
             Destroy(gameObject);
         }
