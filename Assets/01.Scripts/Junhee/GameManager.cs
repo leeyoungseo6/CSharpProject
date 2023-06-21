@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddScore(int point)
     {
-        Score += point;
+        Score = point;
         UpdateScoreText();
     }
     private void UpdateScoreText()
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     {
         Retrypanel.SetActive(true);
         Time.timeScale = 0;
-        return;
+       
     }
     public void Retry()
     {
