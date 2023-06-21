@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene("Youngseo");
+        StartButton();
         Time.timeScale = 1;
 
     }
