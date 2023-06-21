@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _startButton;
     [SerializeField] GameObject _exitButton;
     int score = 0;
+    int startScore = 0;
     public bool _gameOver = true;
 
     public int Score
@@ -30,14 +31,14 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public void AddScore(int point)
+    private void Start()
     {
-        Score = point;
-        UpdateScoreText();
+        scoreText.gameObject.SetActive(false);
     }
-    private void UpdateScoreText()
+    public void UpdateScoreText(int score)
     {
-        scoreText.text = $"{Score:2D}";
+        Score = score - startScore;
+        scoreText.text = $"{Score:D2}";
     }
 
     void Update()
@@ -72,14 +73,6 @@ public class GameManager : MonoBehaviour
         Retrypanel.SetActive(true);
         Time.timeScale = 0;
     }
-    public void Retry()
-    {
-        Score = 0;
-        Time.timeScale = 1;
-        _gameOver = false;
-        SceneManager.LoadScene("Youngseo");
-        StartButton();
-    }
     public void TtileButton()
     {
         Score = 0;
@@ -88,6 +81,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartButton()
     {
+        startScore = Score;
         SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
         scoreText.gameObject.SetActive(true);
         _startButton.SetActive(false);
