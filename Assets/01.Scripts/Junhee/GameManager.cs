@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _exitButton;
     int highscore = 0;
     int score = 0;
-    public bool _gameOver = false;
+    public bool _gameOver = true;
 
     public int Score
     {
@@ -85,13 +85,14 @@ public class GameManager : MonoBehaviour
     }
     public void Retry()
     {
+        _gameOver = false;
         SceneManager.LoadScene("Youngseo");
         StartButton();
         Time.timeScale = 1;
-
     }
     public void TtileButton()
     {
+        _gameOver = true;
         SceneManager.LoadScene("Youngseo");
     }
     public void StartButton()
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
         _startButton.SetActive(false);
         _exitButton.SetActive(false);
+        _gameOver = false;
     }
     public void ExitButton()
     {
