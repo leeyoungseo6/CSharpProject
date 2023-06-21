@@ -14,20 +14,15 @@ public class GameManager : MonoBehaviour
     public GameObject stoppanel;
     [SerializeField] GameObject Retrypanel;
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI highScoreText;
     [SerializeField] GameObject _startButton;
     [SerializeField] GameObject _exitButton;
-    int highscore = 0;
     int score = 0;
     public bool _gameOver = true;
 
     public int Score
     {
         get { return score; }
-        set
-        {
-            if (value > 0) score = value;
-        }
+        set { score = value; }
 
     }
     private void Awake()
@@ -38,12 +33,6 @@ public class GameManager : MonoBehaviour
     public void AddScore(int point)
     {
         Score = point;
-        if (highscore < score)
-        {
-            highscore = score;
-            PlayerPrefs.SetInt("High Score", highscore);
-        }
-
         UpdateScoreText();
     }
     private void UpdateScoreText()
@@ -85,19 +74,22 @@ public class GameManager : MonoBehaviour
     }
     public void Retry()
     {
+        Score = 0;
+        Time.timeScale = 1;
         _gameOver = false;
         SceneManager.LoadScene("Youngseo");
         StartButton();
-        Time.timeScale = 1;
     }
     public void TtileButton()
     {
-        _gameOver = true;
+        Score = 0;
+        Time.timeScale = 1;
         SceneManager.LoadScene("Youngseo");
     }
     public void StartButton()
     {
         SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
+        scoreText.gameObject.SetActive(true);
         _startButton.SetActive(false);
         _exitButton.SetActive(false);
         _gameOver = false;
@@ -105,6 +97,5 @@ public class GameManager : MonoBehaviour
     public void ExitButton()
     {
         Application.Quit();
-        Debug.Log("exit");
     }
 }
