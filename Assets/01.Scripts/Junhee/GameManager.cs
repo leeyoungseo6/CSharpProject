@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     {
         Retrypanel.SetActive(true);
         Time.timeScale = 0;
-        return;
+       
     }
     public void Retry()
     {
