@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance._gameOver) return;
         PlayerMove();
         SetScore();
 
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GameManager.instance._gameOver) return;
         OrbitStar();
     }
 
