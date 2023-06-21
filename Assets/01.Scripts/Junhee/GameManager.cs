@@ -88,10 +88,8 @@ public class GameManager : MonoBehaviour
     }
     public void StartButton()
     {
-      //  SceneManager.LoadScene("Junhee", LoadSceneMode.Additive );
-      //  SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Youngseo", LoadSceneMode.Additive);
-
+        SceneManager.LoadScene("Junhee" );
+        
 
         Debug.Log("start");
     }
