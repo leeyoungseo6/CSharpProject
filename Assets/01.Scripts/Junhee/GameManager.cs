@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _startButton;
     [SerializeField] GameObject _exitButton;
     [SerializeField] TextMeshProUGUI _titleText;
+    [SerializeReference] TextMeshProUGUI _highScoreText;
     int score = 0;
     int startScore = 0;
     public bool _gameOver = true;
@@ -34,17 +35,25 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.SetInt("TopScore", SceneVariable.highScore);
+        _highScoreText.text = $"{PlayerPrefs.GetInt("TopScore"):D2}";
         scoreText.gameObject.SetActive(false);
     }
     public void UpdateScoreText(int score)
     {
         Score = score - startScore;
+        if (Score > SceneVariable.highScore)
+        {
+            SceneVariable.highScore = Score;
+            PlayerPrefs.SetInt("TopScore", SceneVariable.highScore);
+            _highScoreText.text = $"{PlayerPrefs.GetInt("TopScore"):D2}";
+        }
         scoreText.text = $"{Score:D2}";
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !_gameOver)
         {
             if (pause == false)
             {
@@ -76,6 +85,7 @@ public class GameManager : MonoBehaviour
     }
     public void TtileButton()
     {
+        _gameOver = true;
         Score = 0;
         Time.timeScale = 1;
         _titleText.gameObject.SetActive(true);
@@ -84,9 +94,11 @@ public class GameManager : MonoBehaviour
     public void StartButton()
     {
         startScore = Score;
+        _titleText.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("TopScore", SceneVariable.highScore);
+        _highScoreText.text = $"{PlayerPrefs.GetInt("TopScore"):D2}";
         SceneManager.LoadScene("Hanul", LoadSceneMode.Additive);
         scoreText.gameObject.SetActive(true);
-        _titleText.gameObject.SetActive(false);
         _startButton.SetActive(false);
         _exitButton.SetActive(false);
         _gameOver = false;

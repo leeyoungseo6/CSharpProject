@@ -179,6 +179,14 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 654afd4d29415a14f96f7efff8e043b0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 654afd4d29415a14f96f7efff8e043b0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -28607975
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 654afd4d29415a14f96f7efff8e043b0, type: 3}
 --- !u!1 &3821078640537585861 stripped

@@ -5,10 +5,12 @@ public class CreatStar : MonoBehaviour
 {
     [SerializeField] GameObject _enemyPrefab;
     Transform _player;
+    private int _starCount;
 
     int _prevscore = 0;
     void Start()
     {
+        _starCount = 0;
         _player = FindObjectOfType<PlayerController>().transform;
         StartCoroutine("SpawnEnemy");
     }
@@ -21,13 +23,13 @@ public class CreatStar : MonoBehaviour
     {
         while (true)
         {
-            if(GameManager.instance.Score > _prevscore + 2.5f)
+            if(GameManager.instance.Score > _prevscore + 3f)
             {
                 _prevscore = GameManager.instance.Score;
-                yield return new WaitForSeconds(0.3f);
-                GameObject enemy = Instantiate(_enemyPrefab);
                 int rdIndex = Random.Range(0, transform.childCount);
-                enemy.transform.position = transform.GetChild(rdIndex).position;
+                if (_starCount <= 5 && rdIndex == 0) rdIndex = 3;
+                Instantiate(_enemyPrefab, transform.GetChild(rdIndex).position, Quaternion.identity);
+                _starCount++;
             }
             yield return null;
         }

@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
     private void Targeting() //가장 가까운 별 타겟팅
     {
         _toStarDis = 100;
-        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4, new Vector2(8f, 20f), transform.rotation.z, Star);
-        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4, new Vector2(8f, 20f), transform.rotation.z, Star);
+        _starCollsL = Physics2D.OverlapBoxAll(transform.position + transform.right * -4, new Vector2(8f, 30f), transform.rotation.z * Mathf.Rad2Deg, Star);
+        _starCollsR = Physics2D.OverlapBoxAll(transform.position + transform.right *  4, new Vector2(8f, 30f), transform.rotation.z * Mathf.Rad2Deg, Star);
 
         foreach (Collider2D target in _starCollsL)
         {
