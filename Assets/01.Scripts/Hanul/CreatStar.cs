@@ -6,8 +6,8 @@ public class CreatStar : MonoBehaviour
     [SerializeField] GameObject _enemyPrefab;
     Transform _player;
     private int _starCount;
-
     int _prevscore = 0;
+
     void Start()
     {
         _starCount = 0;

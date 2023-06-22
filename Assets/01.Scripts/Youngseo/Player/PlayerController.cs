@@ -26,11 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     SpriteRenderer[] _walls;
 
-    #region 테스트 UI
     private int _score = 0;
     private int _currentScore = 0;
     Vector3 _gameStartPos;
-    #endregion
 
     private void Awake()
     {
@@ -66,13 +64,13 @@ public class PlayerController : MonoBehaviour
 
     private void OrbitStar()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetTouch(0).phase == TouchPhase.Began)
         {
             Targeting();
             _startVec = transform.position;
         }
 
-        if (Input.GetKey(KeyCode.Space) && _targetStar != Vector3.zero) //스페이스바 누를 시 별과 90도 유지
+        if (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved && _targetStar != Vector3.zero) //스페이스바 누를 시 별과 90도 유지
         {
             if (IsRightTri())
             {
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             _walls[0].color = new Color(0.8f, 0.4f, 0.4f);
             _walls[1].color = new Color(0.8f, 0.4f, 0.4f);
@@ -136,8 +134,8 @@ public class PlayerController : MonoBehaviour
             _walls[1].color = new Color(0.6f, 0.8f, 0.8f);
 
             _startOrbit = true;
-            if (_left) _orbitDir = 180 + 2.8f / b;
-            else _orbitDir = -2.8f / b;
+            if (_left) _orbitDir = 180 + 2.9f / b;
+            else _orbitDir = -2.9f / b;
         }
         return _startOrbit;
     }
